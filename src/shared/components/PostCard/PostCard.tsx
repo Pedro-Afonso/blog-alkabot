@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useState } from 'react'
+import { Comments } from '@/shared/components'
 
 import styles from './PostCard.module.scss'
 
@@ -15,9 +16,20 @@ interface IPostCardProps {
 }
 
 export const PostCard: FC<IPostCardProps> = ({ post }) => {
+  const [showComments, setShowComments] = useState(false)
+
+  const handleShowComments = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    const noTextSelected = !window.getSelection()?.toString()
+    if (noTextSelected) {
+      setShowComments(prev => !prev)
+    }
+  }
+
   return (
     <div className={styles.container}>
-      <article>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
+      <article onClick={handleShowComments}>
         <div className={styles['card-header']}>
           <Image
             src={`https://robohash.org/${post.userId}`}
@@ -31,8 +43,13 @@ export const PostCard: FC<IPostCardProps> = ({ post }) => {
           </div>
         </div>
         <div className={styles['card-body']}>{post.body}</div>
-        <div className={styles['card-footer']}>comentários</div>
+        <div className={styles['card-footer']}>
+          <button className="btn btn-primary" onClick={handleShowComments}>
+            Comentários
+          </button>
+        </div>
       </article>
+      {showComments && <Comments postId={post.id} />}
     </div>
   )
 }
