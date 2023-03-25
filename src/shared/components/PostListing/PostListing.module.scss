@@ -1,0 +1,12 @@
+@import '@/styles/mixins.scss';
+
+.posts {
+  @include max-width;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include device(mobile) {
+    gap: 1rem;
+  }
+}
