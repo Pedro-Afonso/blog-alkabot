@@ -29,7 +29,7 @@ export const PostCard: FC<IPostCardProps> = ({ post }) => {
   return (
     <div className={styles.container}>
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
-      <article onClick={handleShowComments}>
+      <article className={styles.card} onClick={handleShowComments}>
         <div className={styles['card-header']}>
           <Image
             src={`https://robohash.org/${post.userId}`}
