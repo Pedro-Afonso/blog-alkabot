@@ -1,0 +1,44 @@
+@import '@/styles/variables.scss';
+
+.comments {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.comments::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: $bg-tertiary;
+}
+
+.comment {
+  background-color: $bg-secondary;
+  border-radius: 1rem;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 8rem;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  h2 {
+    color: $text-secondary;
+  }
+}
+
+.comment-header img {
+  background-color: $bg-tertiary;
+  border-radius: 20%;
+}
+
+.card-body {
+  flex: 1;
+}
