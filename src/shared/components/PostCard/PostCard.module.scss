@@ -1,0 +1,42 @@
+@import '@/styles/variables.scss';
+
+.container {
+  background-color: $bg-secondary;
+  border-radius: 1rem;
+  overflow-x: hidden;
+  word-break: normal;
+}
+
+.card {
+  background-color: $bg-secondary;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 20rem;
+  cursor: pointer;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 1.4rem;
+  gap: 1rem;
+
+  h2 {
+    color: $text-secondary;
+  }
+
+  img {
+    background-color: $bg-tertiary;
+    border-radius: 20%;
+  }
+}
+
+.card-body {
+  padding: 0 1.6rem;
+  flex: 1;
+}
+
+.card-footer {
+  padding: 1.6rem;
+}
