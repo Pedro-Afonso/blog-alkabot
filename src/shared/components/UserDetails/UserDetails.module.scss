@@ -1,0 +1,57 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.section {
+  @include max-width;
+  padding: 3rem;
+}
+
+.user {
+  background-color: $bg-secondary;
+  padding: 1.6rem;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  justify-content: center;
+  gap: 2rem;
+
+  img {
+    background-color: $bg-tertiary;
+    border-radius: 50%;
+  }
+
+  span {
+    font-weight: 600;
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+  @include device(mobile) {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+    img {
+      margin: 0 auto;
+    }
+  }
+}
+
+.info {
+  padding: 1rem;
+}
+
+.company {
+  grid-column: 1/-1;
+  padding: 1rem;
+}
+
+.footer {
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: flex-end;
+  @include device(mobile) {
+    order: -1;
+  }
+}
