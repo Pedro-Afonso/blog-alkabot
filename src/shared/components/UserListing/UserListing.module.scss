@@ -1,0 +1,24 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.users {
+  @include max-width;
+  padding: 3rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  @include device(laptop) {
+    padding: 3rem 2rem;
+  }
+
+  @include device(mobile) {
+    padding: 3rem 1rem;
+    gap: 1rem;
+    grid-template-columns: minmax(230px, 1fr);
+  }
+}
+
+.loadMore {
+  @include flex-center;
+  grid-column: 1/-1;
+}
