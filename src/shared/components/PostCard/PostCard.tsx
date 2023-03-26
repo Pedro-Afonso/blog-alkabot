@@ -34,8 +34,8 @@ export const PostCard: FC<IPostCardProps> = ({ post }) => {
           <Image
             src={`https://robohash.org/${post.userId}`}
             alt={post.userId.toString()}
-            height={50}
-            width={50}
+            height={64}
+            width={64}
           />
           <div>
             <h2>{post.title}</h2>
