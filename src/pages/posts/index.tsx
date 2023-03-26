@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType } from 'next'
 
-import { PostListing, TPost } from '@/shared/components'
+import { PostListing, TPost, AppHead } from '@/shared/components'
 
 const limit = 9
 
@@ -8,9 +8,12 @@ export default function Posts({
   posts
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <main>
-      <PostListing posts={posts} limit={limit} />
-    </main>
+    <>
+      <AppHead />
+      <main>
+        <PostListing posts={posts} limit={limit} />
+      </main>
+    </>
   )
 }
 
