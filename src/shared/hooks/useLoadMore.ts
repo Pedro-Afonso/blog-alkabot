@@ -1,37 +1,54 @@
 import { useState } from 'react'
 
-export const useLoadMore = <T>(
-  endpoint: string,
-  limit: number,
-  start: number
-) => {
+import { getPosts } from '../services/posts'
+import { getUsers } from '../services/users'
+
+export const useLoadMore = (limit: number, start: number) => {
   const [canLoadMore, setCanLoadMore] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   const [nextPage, setNextPage] = useState(0)
 
-  const loadMore = async () => {
+  const loadMorePosts = async () => {
     setIsLoading(true)
 
     try {
-      const res = await fetch(
-        `https://jsonplaceholder.typicode.com/${endpoint}?_start=${
-          start + nextPage * limit
-        }&_limit=${limit}`
-      )
-      const data = (await res.json()) as T[]
-      if (data?.length < limit) {
+      const skip = start + nextPage * limit
+      const posts = await getPosts(skip, limit)
+      if (posts?.length < limit) {
         setCanLoadMore(false)
       }
-      return data
+      return posts
     } catch (error) {
-      setCanLoadMore(false)
       // eslint-disable-next-line no-console
       console.log(error)
+      setCanLoadMore(false)
+      return []
     } finally {
       setNextPage(prev => prev + 1)
       setIsLoading(false)
     }
   }
 
-  return { loadMore, isLoading, canLoadMore }
+  const loadMoreUsers = async () => {
+    setIsLoading(true)
+
+    try {
+      const skip = start + nextPage * limit
+      const users = await getUsers(skip, limit)
+      if (users?.length < limit) {
+        setCanLoadMore(false)
+      }
+      return users
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error)
+      setCanLoadMore(false)
+      return []
+    } finally {
+      setNextPage(prev => prev + 1)
+      setIsLoading(false)
+    }
+  }
+
+  return { loadMorePosts, loadMoreUsers, isLoading, canLoadMore }
 }
