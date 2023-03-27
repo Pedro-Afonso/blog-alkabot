@@ -1,6 +1,7 @@
 import { InferGetStaticPropsType } from 'next'
 
 import { UserListing, TUser, AppHead } from '@/shared/components'
+import { getUsers } from '@/shared/services/users'
 
 const limit = 4
 
@@ -17,10 +18,15 @@ export default function Users({
   )
 }
 export async function getStaticProps() {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/users?_limit=${limit}`
-  )
-  const users = (await res.json()) as TUser[]
+  let users: TUser[]
+
+  try {
+    users = await getUsers(0, limit)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error)
+    users = []
+  }
 
   return {
     props: { users }

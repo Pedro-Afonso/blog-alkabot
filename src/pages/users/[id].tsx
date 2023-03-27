@@ -1,6 +1,7 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
-import { UserDetails, AppHead, TUser } from '@/shared/components'
+import { getUser, getUsers } from '@/shared/services/users'
+import { UserDetails, AppHead } from '@/shared/components'
 
 export default function User({
   user
@@ -20,8 +21,7 @@ export default function User({
 }
 
 export async function getStaticPaths() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users?_limit=4')
-  const users = (await res.json()) as TUser[]
+  const users = await getUsers(0, 4)
   const paths = users.map(({ id }) => ({ params: { id: id.toString() } }))
   return {
     paths,
@@ -30,10 +30,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const id = params?.id ?? ''
+  const id = typeof params?.id === 'string' ? params?.id : ''
 
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-  const user = (await res.json()) as TUser
+  const user = await getUser(id)
 
   return {
     props: { user }

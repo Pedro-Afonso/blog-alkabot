@@ -1,6 +1,7 @@
 import { InferGetStaticPropsType } from 'next'
 
-import { PostListing, TPost, AppHead } from '@/shared/components'
+import { PostListing, AppHead, TPost } from '@/shared/components'
+import { getPosts } from '@/shared/services/posts'
 
 const limit = 9
 
@@ -18,10 +19,15 @@ export default function Posts({
 }
 
 export async function getStaticProps() {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`
-  )
-  const posts = (await res.json()) as TPost[]
+  let posts: TPost[]
+
+  try {
+    posts = await getPosts(0, limit)
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error)
+    posts = []
+  }
 
   return {
     props: { posts }
