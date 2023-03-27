@@ -15,16 +15,12 @@ export const PostListing: FC<IPostListingProps> = ({
 }) => {
   const [posts, setPosts] = useState(initialPosts)
 
-  const { loadMore, canLoadMore } = useLoadMore<TPost>(
-    'posts',
-    limit,
-    initialPosts.length
-  )
+  const { loadMorePosts, canLoadMore } = useLoadMore(limit, initialPosts.length)
 
   const handleLoadMore = async () => {
-    const posts = await loadMore()
-    if (posts) {
-      setPosts(prev => [...prev, ...posts])
+    const newPosts = await loadMorePosts()
+    if (newPosts) {
+      setPosts(prev => [...prev, ...newPosts])
     }
   }
 

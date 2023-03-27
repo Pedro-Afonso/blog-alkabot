@@ -16,14 +16,10 @@ export const UserListing: FC<IUserListingProps> = ({
 }) => {
   const [users, setUsers] = useState(initialUsers)
 
-  const { loadMore, canLoadMore } = useLoadMore<TUser>(
-    'users',
-    limit,
-    initialUsers.length
-  )
+  const { loadMoreUsers, canLoadMore } = useLoadMore(limit, initialUsers.length)
 
   const handleLoadMore = async () => {
-    const newUsers = await loadMore()
+    const newUsers = await loadMoreUsers()
     if (newUsers) {
       setUsers(prev => [...prev, ...newUsers])
     }
