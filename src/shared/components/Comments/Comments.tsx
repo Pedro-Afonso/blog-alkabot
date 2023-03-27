@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { FC, useEffect, useState } from 'react'
 import styles from './Comments.module.scss'
 
-type TComment = {
+export type TComment = {
   postId: number
   id: number
   name: string
