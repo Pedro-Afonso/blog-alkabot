@@ -1,6 +1,7 @@
-import { useLoadMore } from '@/shared/hooks'
 import { FC, useState } from 'react'
-import { PostCard, TPost } from '../PostCard'
+
+import { PostCard, TPost } from '@/shared/components'
+import { useLoadMore } from '@/shared/hooks'
 
 import styles from './PostListing.module.scss'
 
